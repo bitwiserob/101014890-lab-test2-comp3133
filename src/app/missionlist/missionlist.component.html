@@ -1,19 +1,14 @@
 <h1>Spacex Launches</h1>
-<mat-form-field appearance="fill">
-    <mat-label>Year of Launch</mat-label>
-    <mat-select formControlName="year" (click)="filterMissions()">
-      <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
-    </mat-select>
-  </mat-form-field>
+<form [formGroup]="missionFilter">
+  <mat-select formControlName="year" (selectionChange)="filterMissions()">
+    <mat-option value="">All</mat-option>
+    <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
+  </mat-select>
+</form>
 
 <div class="container">
-    <mat-form-field>
-        <mat-label>Year</mat-label>
-        <mat-select formControlName="year">
-          <mat-option *ngFor="let year of years" [value]="year" (change)="filterMissions(year)">{{year}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    <div *ngFor="let launch of launches">
+
+    <div *ngFor="let launch of filteredLaunches">
         <mat-card>
             <mat-card-header>
                 <mat-card-title>{{ launch.mission_name}}</mat-card-title>

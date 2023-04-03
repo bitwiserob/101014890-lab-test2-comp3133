@@ -46,15 +46,16 @@ export class MissionlistComponent implements OnInit {
 
   filterMissions() {
     const year = this.missionFilter.get('year')?.value;
-
-    if (year) {
-      this.filteredLaunches = this.launches.filter(launch => {
-        return launch.launch_year === year;
-      });
-    } else {
+  
+    if (!year) {
       this.filteredLaunches = this.launches;
+      return;
     }
+    
+    this.filteredLaunches = this.launches.filter(launch => launch.launch_year === year.toString());
+    console.log(this.filteredLaunches)
   }
+  
 
 }
 

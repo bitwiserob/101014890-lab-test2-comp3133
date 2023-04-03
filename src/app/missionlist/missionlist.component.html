@@ -1,0 +1,7 @@
+<h1>Spacex Launches</h1>
+<ul>
+    <li *ngFor="let launch of launches">
+        <h2>{{ launch.mission_name}}</h2>
+        <p>{{ launch.launch_data_utc}}</p>
+    </li>
+</ul>

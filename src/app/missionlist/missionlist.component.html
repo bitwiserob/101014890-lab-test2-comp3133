@@ -1,6 +1,18 @@
 <h1>Spacex Launches</h1>
+<mat-form-field appearance="fill">
+    <mat-label>Year of Launch</mat-label>
+    <mat-select formControlName="year" (click)="filterMissions()">
+      <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-<div>
+<div class="container">
+    <mat-form-field>
+        <mat-label>Year</mat-label>
+        <mat-select formControlName="year">
+          <mat-option *ngFor="let year of years" [value]="year" (change)="filterMissions(year)">{{year}}</mat-option>
+        </mat-select>
+      </mat-form-field>
     <div *ngFor="let launch of launches">
         <mat-card>
             <mat-card-header>
@@ -12,7 +24,7 @@
                 <img [src]="launch.links.mission_patch_small" alt="{{ launch.mission_name }} patch">
             </mat-card-content>
             <mat-card-footer>
-                <button>Details</button>
+                <button mat-button color="primary" (click)="showMissionDetails(launch)">Details</button>
             </mat-card-footer>
         </mat-card>
 
@@ -23,16 +35,3 @@
 
 
 
-
-
-
-
-<ul>
-    <li *ngFor="let launch of launches">
-        <h2>{{ launch.mission_name}}</h2>
-        <p>{{ launch.launch_year}}</p>
-        <p>{{ launch.details }}</p>
-        <img [src]="launch.links.mission_patch_small" alt="{{ launch.mission_name }} patch">
-
-    </li>
-</ul>

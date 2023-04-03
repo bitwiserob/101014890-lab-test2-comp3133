@@ -1,7 +1,39 @@
-<div *ngIf="mission">
-    <h2>{{ mission.mission_name }}</h2>
-    <h4>{{ mission.launch_year }}</h4>
-    <p>{{ mission.details }}</p>
-    <img [src]="mission.links.mission_patch_small" alt="{{ mission.mission_name }} patch">
-</div>
-
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ mission.mission_name }} (Flight Number: {{ mission.flight_number }})</mat-card-title>
+      <mat-card-subtitle>Launched on {{ mission.launch_date_utc | date: 'medium' }} (UTC)</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <h1>Details</h1>
+        <p> Launch Success: {{ mission.launch_success }}</p>
+        <p>{{ mission.details }}</p>
+      <div *ngIf="mission.links.mission_patch_small">
+        <img [src]="mission.links.mission_patch_small" alt="{{ mission.mission_name }} patch">
+      </div>
+      <div *ngIf="!mission.links.mission_patch_small">
+        <p>No mission patch available.</p>
+      </div>
+      <h1>Rocket:</h1>
+      <ul>
+        <li>Name: {{ mission.rocket.rocket_name }}</li>
+        <li>Type: {{ mission.rocket.rocket_type }}</li>
+      </ul>
+      <h1>Payload:</h1>
+      <ul>
+        <li>ID: {{ mission.rocket.second_stage.payloads[0].payload_id }}</li>
+        <li>Customers: {{ mission.rocket.second_stage.payloads[0].customers.join(', ') }}</li>
+        <li>Type: {{ mission.rocket.second_stage.payloads[0].payload_type }}</li>
+        <li>Mass: {{ mission.rocket.second_stage.payloads[0].payload_mass_kg }} kg / {{ mission.rocket.second_stage.payloads[0].payload_mass_lbs }} lbs</li>
+        <li>Orbit: {{ mission.rocket.second_stage.payloads[0].orbit }}</li>
+      </ul>
+      <p>Launch Site: {{ mission.launch_site.site_name_long }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+    </mat-card-actions>
+  </mat-card>
+  
+  
+  
+  
+  
+  

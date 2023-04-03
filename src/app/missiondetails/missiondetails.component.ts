@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./missiondetails.component.css']
 })
 export class MissiondetailsComponent {
-  @Input() mission: any; // The selected mission passed from the parent component
+  @Input() mission: any; 
 
   constructor(
     private route: ActivatedRoute,
@@ -15,7 +15,7 @@ export class MissiondetailsComponent {
   ) {}
 
   ngOnInit() {
-    // Get the mission details from the API using the flight_number parameter
+    
     const flight_number = this.route.snapshot.paramMap.get('flight_number');
     this.http.get(`https://api.spacexdata.com/v3/launches/${flight_number}`).subscribe(
       (response) => {

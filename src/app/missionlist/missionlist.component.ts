@@ -9,15 +9,23 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MissionlistComponent implements OnInit {
   launches: any[] = [];
-
+  selectedMission: any;
   constructor(private http: HttpClient) { }
 
 
-  ngOnInit() {
-    this.http.get<any[]>('https://api.spacexdata.com/v3/launches').subscribe(data => {
-      this.launches = data;
-    });
-  }
 
+  ngOnInit() {
+    this.http.get<any[]>('https://api.spacexdata.com/v3/launches').subscribe(
+      (response) => {
+        this.launches = response;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+    }
+  onMissionSelected(mission: any) {
+    this.selectedMission = mission;
+  }
 }
 

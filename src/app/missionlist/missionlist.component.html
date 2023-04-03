@@ -1,7 +1,38 @@
 <h1>Spacex Launches</h1>
+
+<div>
+    <div *ngFor="let launch of launches">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>{{ launch.mission_name}}</mat-card-title>
+                <mat-card-subtitle>{{ launch.launch_year}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p>{{ launch.details }}</p>
+                <img [src]="launch.links.mission_patch_small" alt="{{ launch.mission_name }} patch">
+            </mat-card-content>
+            <mat-card-footer>
+                <button>Details</button>
+            </mat-card-footer>
+        </mat-card>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
 <ul>
     <li *ngFor="let launch of launches">
         <h2>{{ launch.mission_name}}</h2>
-        <p>{{ launch.launch_data_utc}}</p>
+        <p>{{ launch.launch_year}}</p>
+        <p>{{ launch.details }}</p>
+        <img [src]="launch.links.mission_patch_small" alt="{{ launch.mission_name }} patch">
+
     </li>
 </ul>

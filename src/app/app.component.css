@@ -1,0 +1,17 @@
+/* center the website horizontally */
+body {
+    display: flex;
+    justify-content: center;
+    
+  }
+  
+  /* center the website vertically */
+  html, body {
+    height: 100%;
+    max-width: 720px;
+  }
+  
+  body {
+    display: flex;
+    align-items: center;
+  }

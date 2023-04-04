@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
-
+import { SpacexapiService } from '../spacexapi.service';
 @Component({
   selector: 'app-missionlist',
   templateUrl: './missionlist.component.html',
@@ -14,7 +14,7 @@ export class MissionlistComponent implements OnInit {
   filteredLaunches: any[] = [];
   selectedMission: any;
   years: number[] = [];
-  constructor(private http: HttpClient,private router: Router) { }
+  constructor(private http: HttpClient,private router: Router, private spx: SpacexapiService)  { }
 
   missionFilter = new FormGroup({
     year: new FormControl('')
@@ -23,7 +23,17 @@ export class MissionlistComponent implements OnInit {
 
 
   ngOnInit() {
-    this.http.get<any[]>('https://api.spacexdata.com/v3/launches').subscribe(
+    // this.http.get<any[]>('https://api.spacexdata.com/v3/launches').subscribe(
+    //   (response) => {
+    //     this.launches = response;
+    //     this.filteredLaunches = response;
+    //   },
+    //   (error) => {
+    //     console.error(error);
+    //   }
+    // );
+
+      this.spx.getLaunches().subscribe(
       (response) => {
         this.launches = response;
         this.filteredLaunches = response;
@@ -32,6 +42,9 @@ export class MissionlistComponent implements OnInit {
         console.error(error);
       }
     );
+
+  
+
     const currentYear = new Date().getFullYear();
   const startYear = 2006;
   for (let i = startYear; i <= currentYear; i++) {
